@@ -37,7 +37,11 @@ function next_text_banner() {
   }
 }
 function previous_text_banner() {
-  let newText = slides[i - 1].tagLine;
+  if (i > 0) {
+    newText = slides[i - 1].tagLine;
+  } else {
+    newText = slides[3].tagLine;
+  }
   bannerP.innerHTML = newText;
 }
 
@@ -46,14 +50,11 @@ function previous_text_banner() {
  */
 function next_class_dot() {
   dots[i].classList.remove("dot_selected");
-  console.log("Classe 'dot_selected' retirée de l'élément", i);
 
   if (i < slides.length - 1) {
     dots[i + 1].classList.add("dot_selected");
-    console.log("Classe 'dot_selected' ajoutée à l'élément", i + 1);
   } else {
     dots[0].classList.add("dot_selected");
-    console.log("Classe 'dot_selected' ajoutée à l'élément 0");
     i = -1;
   }
 }
@@ -61,9 +62,7 @@ function next_class_dot() {
 function previous_class_dot() {
   if (i > 0) {
     dots[i].classList.remove("dot_selected");
-    console.log("Classe 'dot_selected' retirée de l'élément", i);
     dots[i - 1].classList.add("dot_selected");
-    console.log("Classe 'dot_selected' ajoutée à l'élément", i - 1);
   } else {
     i = 3;
     dots[0].classList.remove("dot_selected");
@@ -95,12 +94,10 @@ function previous_image_banner() {
 /** écoute la fleche droite
  */
 arrow_right.addEventListener("click", () => {
-  console.log("le add event s'est lancé");
   next_class_dot();
   next_image_banner();
   next_text_banner();
   i++;
-  console.log("la valeur de i est" + i);
 });
 
 /** écoute la fleche gauche
@@ -108,58 +105,6 @@ arrow_right.addEventListener("click", () => {
 arrow_left.addEventListener("click", () => {
   previous_class_dot();
   previous_image_banner();
+  previous_text_banner();
   i--;
-  console.log("la valeur de i est" + i);
 });
-
-/** 
-
-
-
-
-function next_class_dot() {
-  dots[i].classList.remove("dot_selected");
-  console.log("Classe 'dot_selected' retirée de l'élément", i);
-
-  if (i < slides.length - 1) {
-    dots[i + 1].classList.add("dot_selected");
-    console.log("Classe 'dot_selected' ajoutée à l'élément", i + 1);
-  } else {
-    dots[0].classList.add("dot_selected");
-    console.log("Classe 'dot_selected' ajoutée à l'élément 0");
-    i = -1;
-  }
-}
-
-function previous_class_dot() {
-  if(i>0){dots[i].classList.remove("dot_selected");
-  console.log("Classe 'dot_selected' retirée de l'élément", i);
-  dots[i - 1].classList.add("dot_selected");
-  console.log("Classe 'dot_selected' ajoutée à l'élément", i - 1);}
-  else {
-    i=3;
-    dots[0].classList.remove("dot_selected");
-    dots[3].classList.add("dot_selected");
-    i++
-  }
-}
-
-
-arrow_right.addEventListener("click", () => {
-     console.log("le add event s'est lancé")
-  next_class_dot();
-  i++;
-   console.log("la valeur de i est" + i);
-});
-
-
-arrow_left.addEventListener("click", () => {
-  previous_class_dot();
-  i--
-  console.log("la valeur de i est" + i)
- 
- 
-});
-
- * 
- */
